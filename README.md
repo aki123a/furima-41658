@@ -54,7 +54,7 @@
 | shipping_area_id | integer    | null: false                    |
 | city             | string     | null: false                    |
 | address_banti    | string     | null: false                    |
-| address_building | string     | null: false                    |
+| address_building | string     |
 | phone_number     | string     | null: false                    |
 
 - belongs_to :order
