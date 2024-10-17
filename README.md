@@ -14,47 +14,47 @@
 | birthday            | date   | null: false |
 
 - has_many :items
-- has_one :order
+- has_many :orders
 
 ## items テーブル
 
 | Column             | Type       | Options      |
 | ------------------ | ---------- | ------------ |
-| user_id            | references | null: false, foreign_key: true  |
+| user               | references | null: false, foreign_key: true  |
 | item_name          | string     | null: false |
 | explanation        | text       | null: false |
 | category_id        | integer    | null: false  |
 | condition_id       | integer    | null: false  |
 | shipping_fee_id    | integer    | null: false  |
 | shipping_area_id   | integer    | null: false  |
-| delivery_days_id   | integer    | null: false  |
+| delivery_day_id   | integer    | null: false  |
 | price  | integer   | null: false |
 
 - belongs_to :user
-- belongs_to :order
+- has_one :order
 
 ## orders テーブル
 
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| user_id           | references | null: false, foreign_key: true | 
-| item_id           | references | null: false, foreign_key: true |
+| user              | references | null: false, foreign_key: true | 
+| item              | references | null: false, foreign_key: true |
 
 - has_one :address
 - belongs_to :item
-- has_many :users
+- belongs_to :user
 
 ## addresses テーブル
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| order_id         | references | null: false, foreign_key: true |
+| order            | references | null: false, foreign_key: true |
 | postal_code      | string     | null: false                    |
 | prefecture_id    | integer    | null: false                    |
 | city             | string     | null: false                    |
 | address_banti    | string     | null: false                    |
-| address_building | string     |                                |
+| address_building | string     | null: false                    |
 | phone_number     | string     | null: false                    |
 
 - belongs_to :order
