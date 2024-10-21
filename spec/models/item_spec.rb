@@ -29,35 +29,35 @@ RSpec.describe Item, type: :model do
 
     # category_idのテスト
     it 'category_idが---の場合は登録できない' do
-      @item.category_id = "1"
+      @item.category_id = 1
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
 
     # condition_idのテスト
     it 'condition_idが---の場合は登録できない' do
-      @item.condition_id = "1"
+      @item.condition_id = 1
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Condition can't be blank")
     end
 
     # shipping_fee_idのテスト
     it 'shipping_fee_idが---の場合は登録できない' do
-      @item.shipping_fee_id = "1"
+      @item.shipping_fee_id = 1
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
     end
 
     # shipping_area_idのテスト
     it 'shipping_area_idが---の場合は登録できない' do
-      @item.shipping_area_id = "0"
+      @item.shipping_area_id = 0
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Shipping area can't be blank")
     end
 
     # delivery_day_idのテスト
     it 'delivery_day_idが---の場合は登録できない' do
-      @item.delivery_day_id = "1"
+      @item.delivery_day_id = 1
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Delivery day can't be blank")
     end
