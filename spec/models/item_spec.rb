@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
-    @item = FactoryBot.build(:item)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.build(:item, user: @user)
   end
 
   context '商品登録できる場合' do
-    it 'item_name、explanation、category_id、condition_id、shipping_fee_id、shipping_area_id、delivery_day_id、price、imageが存在すれば登録できる' do
+    it 'user_id,item_name、explanation、category_id、condition_id、shipping_fee_id、shipping_area_id、delivery_day_id、price、imageが存在すれば登録できる' do
       expect(@item).to be_valid
     end
   end
@@ -27,36 +28,36 @@ RSpec.describe Item, type: :model do
     end
 
     # category_idのテスト
-    it 'category_idが0の場合は登録できない' do
-      @item.category_id = "nil"
+    it 'category_idが---の場合は登録できない' do
+      @item.category_id = "1"
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Category can't be blank")
     end
 
     # condition_idのテスト
-    it 'condition_idが0の場合は登録できない' do
-      @item.condition_id = "nil"
+    it 'condition_idが---の場合は登録できない' do
+      @item.condition_id = "1"
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Condition can't be blank")
     end
 
     # shipping_fee_idのテスト
-    it 'shipping_fee_idが0の場合は登録できない' do
-      @item.shipping_fee_id = "nil"
+    it 'shipping_fee_idが---の場合は登録できない' do
+      @item.shipping_fee_id = "1"
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Shipping fee can't be blank")
     end
 
     # shipping_area_idのテスト
-    it 'shipping_area_idが0の場合は登録できない' do
-      @item.shipping_area_id = "nil"
+    it 'shipping_area_idが---の場合は登録できない' do
+      @item.shipping_area_id = "0"
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Shipping area can't be blank")
     end
 
     # delivery_day_idのテスト
-    it 'delivery_day_idが0の場合は登録できない' do
-      @item.delivery_day_id = "nil"
+    it 'delivery_day_idが---の場合は登録できない' do
+      @item.delivery_day_id = "1"
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Delivery day can't be blank")
     end
@@ -78,6 +79,12 @@ RSpec.describe Item, type: :model do
       @item.price = '三千'
       expect(@item).to be_invalid
       expect(@item.errors.full_messages).to include("Price is not a number")
+    end
+
+    it 'userが紐づいていなければ登録できない' do
+      @item.user = nil # Userを紐づけない
+      expect(@item).to be_invalid
+      expect(@item.errors.full_messages).to include("User must exist") # Userのバリデーションエラーメッセージを確認
     end
 
     # imageのテスト
