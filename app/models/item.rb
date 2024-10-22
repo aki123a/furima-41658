@@ -6,12 +6,12 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee
   belongs_to :shipping_area
   belongs_to :delivery_day
-  has_one :order
+  # has_one :order
   has_one_attached :image 
 
-  def sold_out?
-    order.present?
-  end
+  # def sold_out?
+  #   order.present?
+  # end
 
 
   validates :image, presence:true
