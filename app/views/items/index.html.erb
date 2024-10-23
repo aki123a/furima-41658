@@ -136,7 +136,7 @@
     <% @items.each do |item| %>
  
     <li class='list'>
-      <%= image_tag item.image, class: "item-img" %>
+      <%= link_to image_tag(item.image, class: "item-img"), item_path(item.id) %>
       <div class='item-info'>
         <h3 class='item-name'>
           <%= item.item_name %>
