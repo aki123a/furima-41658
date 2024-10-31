@@ -35,8 +35,8 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
-    @shipping_fee = @item.shipping_fee
-    @image = @item.image
+    @item.shipping_fee.name
+    @item.image
   end
 
   def pay_item
