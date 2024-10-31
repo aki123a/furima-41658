@@ -1,12 +1,10 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
+  before_action :redirect_if, only: [:index]
 
   def index
-    if @item.user_id == current_user.id || @item.sold_out?
-      redirect_to root_path
-      return
-    end
+  
     @order_address = OrderAddress.new
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
@@ -44,5 +42,12 @@ class OrdersController < ApplicationController
       card: order_params[:token], # カードトークン
       currency: 'jpy'             # 日本円
     )
+  end
+
+  def redirect_if
+    @item = Item.find(params[:item_id]) 
+    if @item.user_id == current_user.id || @item.sold_out?
+      redirect_to root_path
+    end
   end
 end

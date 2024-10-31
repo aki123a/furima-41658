@@ -12,24 +12,32 @@ RSpec.describe OrderAddress, type: :model do
       expect(@order_address).to be_valid
     end
 
+    it "建物名がなくても保存できること" do
+      @order_address.address_building = nil
+      sleep(1) 
+      expect(@order_address).to be_valid
+    end
+  end
 
+  context 'バリデーションが失敗する場合' do
     it "user_idが空の場合は保存できないこと" do
       @order_address.user_id = nil
       @order_address.valid?
+      sleep(1) 
       expect(@order_address.errors.full_messages).to include("User can't be blank")
     end
 
     it "item_idが空の場合は保存できないこと" do
       @order_address.item_id = nil
       @order_address.valid?
+      sleep(1) 
       expect(@order_address.errors.full_messages).to include("Item can't be blank")
     end
-  end
 
-  context 'バリデーションが失敗する場合' do
     it "tokenが空の場合は保存できないこと" do
       @order_address.token = nil
       @order_address.valid?
+      sleep(1) 
       expect(@order_address.errors.full_messages).to include("Token can't be blank")
     end
     
