@@ -65,9 +65,9 @@ RSpec.describe OrderAddress, type: :model do
 
     it "建物名がなくても保存できること" do
       @order_address.address_building = nil
+      sleep(1) 
       expect(@order_address).to be_valid
     end
-  end
 
     it "電話番号が空の場合は保存できないこと" do
       @order_address.phone_number = nil
