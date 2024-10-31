@@ -45,7 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def redirect_if
-    @item = Item.find(params[:item_id]) 
     if @item.user_id == current_user.id || @item.sold_out?
       redirect_to root_path
     end
