@@ -5,10 +5,8 @@ FactoryBot.define do
     city { "東京都" }
     address_banti { "1-1" }
     phone_number { "09012345678" }
+    address_building {"マンション"}
     token { "tok_abcdefghijk00000000000000000" }
 
-    # 必要に応じて関連するuserとitemを定義
-    association :user
-    association :item
   end
 end

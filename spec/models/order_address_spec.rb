@@ -11,10 +11,23 @@ RSpec.describe OrderAddress, type: :model do
     it "全ての必須項目が正しく入力されていれば保存できること" do
       expect(@order_address).to be_valid
     end
+
+
+    it "user_idが空の場合は保存できないこと" do
+      @order_address.user_id = nil
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("User can't be blank")
+    end
+
+    it "item_idが空の場合は保存できないこと" do
+      @order_address.item_id = nil
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Item can't be blank")
+    end
   end
 
   context 'バリデーションが失敗する場合' do
-    it "tokenが空では登録できないこと" do
+    it "tokenが空の場合は保存できないこと" do
       @order_address.token = nil
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Token can't be blank")
@@ -33,7 +46,7 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     it "都道府県が空の場合は保存できないこと" do
-      @order_address.shipping_area_id = nil
+      @order_address.shipping_area_id = 0
       sleep(1) 
       expect(@order_address).to_not be_valid
     end
@@ -49,6 +62,12 @@ RSpec.describe OrderAddress, type: :model do
       sleep(1) 
       expect(@order_address).to_not be_valid
     end
+
+    it "建物名がなくても保存できること" do
+      @order_address.address_building = nil
+      expect(@order_address).to be_valid
+    end
+  end
 
     it "電話番号が空の場合は保存できないこと" do
       @order_address.phone_number = nil

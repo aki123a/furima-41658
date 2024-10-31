@@ -3,11 +3,11 @@ class OrderAddress
   attr_accessor :postal_code, :shipping_area_id, :city, :address_banti, :address_building, :phone_number, :token, :user_id, :item_id
 
   with_options presence: true do
-    validates :postal_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/ }
+    validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/ }
     validates :shipping_area_id, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :address_banti
-    validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/ }
     validates :token
     validates :user_id
     validates :item_id
